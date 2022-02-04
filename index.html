@@ -1,14 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timer Quiz</title>
-</head>
-<body>
-    
 
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./assets/styles.css"/>
+</head>
+
+<body>
+    <div class="hScores"><a href="highscores.html">View Highscores</a></div>
+
+    <div class="timer">Time:<span id="qTime">100</span></div>
+
+    <div class="wrapper">
+        <!-- start screen -->
+        <div id="start-screen" class="start screen-start">
+            <h1 class="px-4 pt-4 m-8">Timer quiz</h1>
+            <p class="p-4 m-8">
+                Answer the questions. If you are wrong you will lose time. If you are right you will proceed to the next question.
+            </p>
+            <button id="start" class="btn btn-info btn-lg">Start Quiz</button>
+        </div>
+    </div>
+
+    <!-- questions screen -->
+    <div id="questions" class="hide screen-questions py-4">
+        <h2 id="question-title" class="p-4 m-8">Question Text</h2>
+        <div id="choices" class="container choices d-flex justify-content-center">
+            <div class="row" id="button-choice">
+                <div class="col-6 p-2">
+                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice1</button>
+
+                </div>
+                <div class="col-6 p-2">
+                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice2</button>
+                    
+                </div>
+                <div class="col-6 p-2">
+                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice3</button>
+                    
+                </div>
+                <div class="col-6 p-2">
+                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice4</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end screen -->
+    <div id="end-screen" class="hide screen-end rounded">
+        
+    </div>
 
 
     <script src =.assets/js/script.js></script>
