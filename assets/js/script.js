@@ -42,7 +42,6 @@ function startTimer() {
         // if time is less than or equal to 0
         if (timeCount <= 0) {
             // hide questions screen
-            questionScreen.classList.remove('start');
             questionScreen.classList.add('hide');
         }
     }, 1000);
