@@ -1,14 +1,11 @@
 // Start Quiz <button> with id="start"
 var startBtn = document.getElementById('start');
+// Start Quiz <button> with id="start"
+var recordBtn = document.getElementById('record');
 // start screen 
 var startScreen = document.getElementById('start-screen');
 //question screen
-var questionScreen= document.getElementById('questions')
-//high score link
-var highScoreLink= document.getElementById('hslink')
 
-// QUESTIONS SCREEN
-// reference questions screen
 const questionsScreen = document.getElementById('questions');
 // reference location where questions will display
 const questionText = document.getElementById('question-title');
@@ -24,12 +21,15 @@ var questionIndex=0;
 
 const endScreen = document.getElementById('end-screen');
 let displayedScore = document.getElementById('userTime');
-
-
+var score=0;
+var usersArr=[];
 let timeCount;
 
 // function to start the quiz
 function startQuiz() {
+    score=0;
+    questionIndex=0;
+
     // set timer
     timeCount = 20;
     // set displayed time 
@@ -41,7 +41,7 @@ function startQuiz() {
     startScreen.classList.add('hide');
 
     // display questions screen
-    questionScreen.classList.remove('hide');
+    questionsScreen.classList.remove('hide');
     
     displayQuestions();
 
@@ -49,8 +49,7 @@ function startQuiz() {
 
 // start timer 
 function startTimer() {
-    //hide highscore link
-    highScoreLink.classList.add('hide');
+
 
     // setInterval @ 1sec
     timeInterval = setInterval(function() {
@@ -60,7 +59,7 @@ function startTimer() {
         // if time is less than or equal to 0
         if (timeCount <= 0) {
             // hide questions screen
-            questionScreen.classList.add('hide');
+            questionsScreen.classList.add('hide');
             endGame();
         }
     }, 1000);
@@ -135,13 +134,10 @@ function clickedAnswer(event) {
 
     // let userAnswer = the text of the button the user clicked
     let userAnswer = event.target.innerText;
-    
-    // make button clicked out of focus to return 
-    event.target.blur();
-
+  
     // if userAnswer = the answer to the current question show next question
     if (userAnswer === quizQuestions[questionIndex].answer) {
-
+        score+=15;
         // if the current question is the last question, end the game
         if (questionIndex === 5) {
             endGame();
@@ -155,7 +151,7 @@ function clickedAnswer(event) {
     // if the question is incorrect, subtract 10 secs and move onto next question or end game
     else {
 
-        // deduct by 10sec
+        // deduct by 2sec
         timeCount-=2;
 
         // turn button clicked with wrong answer red
@@ -171,7 +167,7 @@ function clickedAnswer(event) {
                 
                 // end the game
                 endGame();
-            }, 1000);
+            }, 250);
 
         }
         else {
@@ -184,12 +180,12 @@ function clickedAnswer(event) {
                 // go to next question
                 questionIndex++;
                 displayQuestions();
-            }, 1000);
+            }, 100);
         }
     }
 };
 function endGame() {
-    let userScore = timeCount;
+    
     // stop the time
     clearInterval(timeInterval);
 
@@ -201,9 +197,72 @@ function endGame() {
     endScreen.classList.remove('hide');
     endScreen.classList.add('start');
 
-    // // grab the time left as a score and display it on the screen
-    // let displayedScore = document.getElementById('final-score');
-    displayedScore.innerText = userScore;
+    //update and display the score
+    score+=timeCount;
+    displayedScore.innerText = score;
 };
 
+// loads scores from local storage, if any, to save into users empty array first
+function loadScores() {
+
+    // load saved scores
+    let savedScores = localStorage.getItem('highScores');
+    // turn savedScores into an array
+    savedScores = JSON.parse(savedScores);
+
+    // if there are no scores to display, do nothing
+    if (savedScores === null) {
+        return;
+    }
+    // else there are scores to display, add them to the users []; empty array
+    else {
+        usersArr = savedScores;
+    }
+};
+
+
+// get the users name and score to save to local storage
+function saveScore() {
+    console.log("save score ran")
+    // get users input value
+    let userName = document.getElementById('user-name').value;
+
+
+    // check for valid response
+    if (userName.length > 0) {
+        
+        // push the input name and score into empty array
+        usersArr.push ({
+            user: userName,
+            score: score 
+        });
+        alert("Your score has been saved!");
+    }
+    else {
+        alert("Please enter a valid response!")
+        return;
+    }
+    console.log("userArr:")
+    // save users array to local storage but stringify first
+    localStorage.setItem('highScores', JSON.stringify(usersArr));
+
+    // hide end screen
+    endScreen.classList.remove('start');
+    endScreen.classList.add('hide');
+
+    // show start game screen
+    startScreen.classList.remove('hide');
+    startScreen.classList.add('start');
+
+    // reset timer text
+    timerEl.textContent = 20;
+};
+
+
+
+
+
+
+loadScores();
 startBtn.addEventListener('click', startQuiz);
+recordBtn.addEventListener('click', saveScore);
