@@ -15,8 +15,8 @@
 
 <body>
     <center>
-    <div class="timer">Time:<span id="qTime">100</span></div>
-    <div class="hScores"><a href="highscores.html">View Highscores</a></div>
+    <div class="timer">Time:<span id="qTime">20</span></div>
+    <div id="hslink" class="hScores"><a href="highscores.html">View Highscores</a></div>
     </center>
 
     <div class="wrapper">
@@ -25,7 +25,7 @@
             <center>
             <h1>Timer quiz</h1>
             <p>
-                Answer the questions. If you are wrong you will lose time. If you are right you will proceed to the next question.
+                Answer the questions. If you are wrong you will lose time. If you are right you will proceed to the next question. Run out of time and you lose!
             </p>
             <button id="start" class="btn btn-info btn-lg">Start Quiz</button>
             </center>
@@ -38,19 +38,19 @@
         <div id="choices" class="container choices d-flex justify-content-center">
             <div class="row" id="button-choice">
                 <div class="col-6 p-2">
-                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice1</button>
+                    <button id="answer1" onclick="clickedAnswer(event)" class="btn btn-info btn-block">CSS</button>
 
                 </div>
                 <div class="col-6 p-2">
-                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice2</button>
+                    <button id="answer2" onclick="clickedAnswer(event)" class="btn btn-info btn-block">HTML</button>
                     
                 </div>
                 <div class="col-6 p-2">
-                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice3</button>
+                    <button id="answer3" onclick="clickedAnswer(event)" class="btn btn-info btn-block">Javascript</button>
                     
                 </div>
                 <div class="col-6 p-2">
-                    <button onclick="clickedAnswer(event)" class="btn btn-info btn-block">choice4</button>
+                    <button id="answer4" onclick="clickedAnswer(event)" class="btn btn-info btn-block">All of these</button>
                     
                 </div>
             </div>
@@ -59,8 +59,12 @@
 
 
     <!-- end screen -->
-    <div id="end-screen" class="hide screen-end rounded">
+    <div id="end-screen" class="hide screen-end">
+        <center>
+        <h2>The Game is over</h2>
+        <h3>Your Score is: </h3><span id="userTime" class="bold"></span>
         
+        </center>
     </div>
 
 
