@@ -14,19 +14,17 @@
 </head>
 
 <body>
-    <center>
-    <div class="timer">Time:<span id="qTime">20</span></div>
-    <div id="hslink" class="hScores"><a href="highscores.html">View Highscores</a></div>
-    </center>
-
+    <center><div class="timer">Time:<span id="qTime">20</span></div></center>
     <div class="wrapper">
         <!-- start screen -->
         <div id="start-screen" class="screen-start">
             <center>
             <h1>Timer quiz</h1>
-            <p>
-                Answer the questions. If you are wrong you will lose time. If you are right you will proceed to the next question. Run out of time and you lose!
-            </p>
+            
+            <div id="hslink" class="hScores"><a href="highscores.html">View Highscores</a></div>
+            <h6 class="text-center flex">
+                Answer the questions. If you are wrong you will lose 2 seconds. If you are right you will proceed to the next question. Run out of questions or time and the game ends!
+            </h6>
             <button id="start" class="btn btn-info btn-lg">Start Quiz</button>
             </center>
         </div>
@@ -62,7 +60,19 @@
     <div id="end-screen" class="hide screen-end">
         <center>
         <h2>The Game is over</h2>
-        <h3>Your Score is: </h3><span id="userTime" class="bold"></span>
+        <h3>Your Score is: </h3><span id="userTime" class="h1"></span><br>
+        <div id="restart" class="btn btn-info btn-lg"><a href="index.html">Retry</a></div>
+        <div>
+            <h4 class="userName">Enter your name to record:</h4>
+                <input
+                type="text"
+                id="user-name"
+                maxlength="10"
+                minlength="1"
+                onkeypress="enterKeyPressed(event)"
+                />
+            <button id="record" class="btn btn-info mb-1">Record Score</button>
+        </div>  
         
         </center>
     </div>
